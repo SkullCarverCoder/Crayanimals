@@ -1,1 +1,1 @@
-web: python AnimalBot.py
+bot: python3 AnimalBot.py
