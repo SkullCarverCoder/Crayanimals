@@ -82,7 +82,7 @@ def main():
     updater.start_webhook(listen="0.0.0.0",
                       port=PORT,
                       url_path=TOKEN)
-    updater.bot.set_webhook("https://<appname>.herokuapp.com/" + TOKEN)
+    updater.bot.set_webhook("https://calm-forest-84206.herokuapp.com/" + TOKEN)
     updater.idle()
 
     # Run the bot until the user presses Ctrl-C or the process receives SIGINT,
