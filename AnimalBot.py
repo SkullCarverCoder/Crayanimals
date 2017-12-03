@@ -3,6 +3,7 @@
 
 import os
 import telegram
+import telegram.ext
 import logging
 from lxml import html
 import requests
