@@ -8,6 +8,8 @@ import logging
 from lxml import html
 import requests
 import re
+from queue import Queue
+from threading import Thread
 
 TOKEN='486238819:AAF09P6xwZenMePsC29JQywZEO1OQrcpVVs'
 def Query():
