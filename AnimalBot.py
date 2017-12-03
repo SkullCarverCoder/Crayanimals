@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-import telegram
+from telegram import *
 import logging
 from lxml import html
 import requests
