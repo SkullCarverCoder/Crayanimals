@@ -9,7 +9,8 @@ from lxml import html
 import requests
 import re
 
-TOKEN=os.environ.get('TOKEN')
+TOKEN=os.environ.get('TOKEN',3);
+PORT = int(os.environ.get('PORT', '5000'))
 def Query():
 	page = requests.get("http://www.loteriadehoy.com/animalitos/")
 	tree = html.fromstring(page.content)
@@ -72,7 +73,6 @@ def main():
     updater = Updater(TOKEN)
 
     # Start the Bot
-    PORT = int(os.environ.get('PORT', '5000'))
     # add handlers
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
