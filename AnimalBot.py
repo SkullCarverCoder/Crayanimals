@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
+import telegram
 import logging
 from lxml import html
 import requests
@@ -33,10 +32,10 @@ try:
 except:
     date=None;
 def start(bot, update):
-    keyboard = [[InlineKeyboardButton("Lotto Activo", callback_data='1'),
-                 InlineKeyboardButton("La Granjita", callback_data='2')]]
+    keyboard = [[telegram.InlineKeyboardButton("Lotto Activo", callback_data='1'),
+                 telegram.InlineKeyboardButton("La Granjita", callback_data='2')]]
 
-    reply_markup = InlineKeyboardMarkup(keyboard)
+    reply_markup = telegram.InlineKeyboardMarkup(keyboard)
 
     update.message.reply_text('Por favor elija su opción:', reply_markup=reply_markup)
 
@@ -70,7 +69,7 @@ def error(bot, update, error):
 
 def main():
     # Create the Updater and pass it your bot's token.
-    updater = Updater(TOKEN)
+    updater = telegram.ext.Updater(TOKEN)
 
     # Start the Bot
     # add handlers
