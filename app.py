@@ -11,7 +11,7 @@ import re
 from queue import Queue
 from threading import Thread
 
-TOKEN='486238819:AAF09P6xwZenMePsC29JQywZEO1OQrcpVVs'
+TOKEN=os.environ.get('TOKEN')
 def Query():
 	page = requests.get("http://www.loteriadehoy.com/animalitos/")
 	tree = html.fromstring(page.content)
@@ -71,33 +71,21 @@ def error(bot, update, error):
 def main():
     """If webhook_url is not passed, run with long-polling."""
     logging.basicConfig(level=logging.WARNING)
-    webhook_url=None
-    if webhook_url:
-        bot = Bot(TOKEN)
-        update_queue = Queue()
-        dp = Dispatcher(bot, update_queue)
-    else:
-        updater = Updater(TOKEN)
-        bot = updater.bot
-        dp = updater.dispatcher
-    # Create the Updater and pass it your bot's token.
-
-    # Start the Bot
+    webhook_url="https://calm-forest-84206.herokuapp.com/"
+    PORT = int(os.environ.get('PORT'))
+    updater = Updater(TOKEN)
+    bot = updater.bot
+    dp = updater.dispatcher
     # add handlers
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CallbackQueryHandler(button))
     updater.dispatcher.add_handler(CommandHandler('help', help))
     updater.dispatcher.add_error_handler(error)
-    if webhook_url:
-        bot.set_webhook(webhook_url=webhook_url)
-        thread = Thread(target=dp.start, name='dispatcher')
-        thread.start()
-        return update_queue, bot
-    else:
-        bot.set_webhook()  # Delete webhook
-        updater.start_polling()
-        updater.idle()
-
+    updater.start_webhook(listen="0.0.0.0",
+                      port=PORT,
+                      url_path=TOKEN)
+    updater.bot.set_webhook(webhook_url + TOKEN)
+    updater.idle()
 
 if __name__ == '__main__':
     try:
