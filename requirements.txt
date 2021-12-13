@@ -1,7 +1,7 @@
 certifi==2017.11.5
 chardet==3.0.4
 idna==2.6
-lxml==4.1.1
+lxml==4.6.5
 requests==2.18.4
 python-telegram-bot>=8.1.1
 urllib3==1.22
